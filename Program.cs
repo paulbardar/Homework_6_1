@@ -48,8 +48,155 @@ namespace Homework_6_1
 
             Console.ReadKey();
             */
+
+            /*Task 6_3 Shop*/
+
+            Console.WriteLine("--- Create shop with uncorrect email ---");
+            Shop wrongEmailShop = new Shop("First Shop", "Underfined city", "Desc about profile", "1234455", "uncorrect_email_com");
+            Console.WriteLine(wrongEmailShop);
+
+            Console.WriteLine("\n--- Create interactive Shop ---");
+            Shop shop1 = new Shop();
+            shop1.InputData();
+            Console.WriteLine(shop1);
+
+            Console.WriteLine("\n--- Create 3 magazine with correct data ---");
+            Shop shop3 = new Shop("Great", "Kharkiv city", "IT shop", "+380751122335", "great_it@victory.ua");
+            Console.WriteLine("\n--- Result ---");
+            Console.WriteLine(shop3);
+
+            Shop shop4 = new Shop();
+
+            Console.WriteLine("------ Step-by-step store data entry ------");
+
+            // Виклик кожного методу окремо
+            shop4.InputName();
+            shop4.InputAddress();
+            shop4.InputProfile();
+            shop4.InputPhone();
+            shop4.InputEmail();
+
+            // Виведення результату
+            Console.WriteLine("\n------ Result ------");
+            Console.WriteLine(shop4);
         }
     }
+    /*Task 6_3 Shop*/
+    public class Shop
+    {
+        private string email;
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string ProfileDescription { get; set; }
+        public string Phone { get; set; }
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                if (value != null && value.Contains("@"))
+                {
+                    email = value;
+                }
+                else
+                {
+                    Console.WriteLine("Uncorrect email. Default value is set.");
+                    email = "unknown@shop.com";
+                }
+            }
+        }
+
+        public Shop()
+        {
+            Name = "Underfined";
+            Address = "Underfined";
+            ProfileDescription = "No Desc";
+            Phone = "+380000000000";
+            Email = "info@shop.com";
+        }
+
+        public Shop(string name, string address, string profile, string phone, string email)
+        {
+            Name = name;
+            Address = address;
+            ProfileDescription = profile;
+            Phone = phone;
+            Email = email;
+        }
+
+        public void InputName()
+        {
+            Console.Write("Input name of shop: ");
+            Name = Console.ReadLine();
+        }
+        public void InputAddress()
+        {
+            Console.Write("Input address: ");
+            Address = Console.ReadLine();
+        }
+        public void InputProfile()
+        {
+            Console.Write("Input profile desc: ");
+            ProfileDescription = Console.ReadLine();
+        }
+
+        public void InputPhone()
+        {
+            Console.Write("Input phone: ");
+            Phone = Console.ReadLine();
+        }
+        public void InputEmail()
+        {
+            string inputEmail;
+            do
+            {
+                Console.Write("Enter Email (have to contain '@'): ");
+                inputEmail = Console.ReadLine();
+                if (!inputEmail.Contains("@"))
+                {
+                    Console.WriteLine("Error! E-mail have to contain '@'. Try again.");
+                }
+            } while (!inputEmail.Contains("@"));
+
+            Email = inputEmail;
+        }
+
+        public void InputData()
+        {
+            Console.WriteLine("===== Enter data about shop =====");
+            Console.Write("Enter name of Shop: "); Name = Console.ReadLine();
+            Console.Write("Enter address: "); Address = Console.ReadLine();
+            Console.Write("Enter profile desc: "); ProfileDescription = Console.ReadLine();
+            Console.Write("Enter Phone: "); Phone = Console.ReadLine();
+
+            string inputEmail;
+            do
+            {
+                Console.Write("Enter Email (have to contain '@'): ");
+                inputEmail = Console.ReadLine();
+                if (!inputEmail.Contains("@"))
+                {
+                    Console.WriteLine("Error! E-mail have to contain '@'. Try again.");
+                }
+            } while (!inputEmail.Contains("@"));
+            Email = inputEmail;
+            Console.WriteLine("Data saved successfully!\n");
+        }
+
+        public override string ToString()
+        {
+            return $"--- Shop: {Name} ---\n" +
+                   $"Address: {Address}\n" +
+                   $"Profile: {ProfileDescription}\n" +
+                   $"Phone: {Phone}\n" +
+                   $"E-mail: {Email}";
+        }
+    }
+
     /*Task 6_2 */
     /*
     class Magazine
@@ -145,7 +292,7 @@ namespace Homework_6_1
 
             while (true)
             {
-                Console.Write("Email (wh=ith '@'): ");
+                Console.Write("Email (whith '@'): ");
                 string inputEmail = Console.ReadLine();
                 if (inputEmail.Contains("@"))
                 {
